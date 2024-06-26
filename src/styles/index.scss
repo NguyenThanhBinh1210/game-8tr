@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+}
+
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+select,
+textarea {
+  background-color: transparent;
+  outline: none;
+}
+
+button {
+  cursor: pointer;
+
+}
+
+body {
+  min-height: 100vh;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.my_logo {
+  height: 30px;
+  line-height: 30px;
+  margin-top: -7px;
+  display: inline-block;
+  vertical-align: middle;
+  font-weight: 600;
+  background-image: -webkit-linear-gradient(left, #FFEB3B, #ff7d02 10%, #ff7d02 20%, #c3f985 30%, #CCCCFF 40%, #ff7902 50%, #f38bf0 60%, #ff7902 70%, #c3f985 80%, #ff7d02 90%, #FFEB3B 100%);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-background-size: 200% 100%;
+  -webkit-animation: masked-animation 4s linear infinite;
+  font-size: 18px;
+}
+
+@keyframes masked-animation {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: -100% 0;
+  }
+}
