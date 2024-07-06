@@ -88,7 +88,7 @@ const useRouteElements = () => {
               <My />
             </HomeLayout>
           )
-        },
+        }
       ]
     },
     {

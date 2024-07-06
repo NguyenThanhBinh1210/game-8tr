@@ -31,7 +31,6 @@ textarea {
 
 button {
   cursor: pointer;
-
 }
 
 body {
@@ -47,7 +46,20 @@ body {
   display: inline-block;
   vertical-align: middle;
   font-weight: 600;
-  background-image: -webkit-linear-gradient(left, #FFEB3B, #ff7d02 10%, #ff7d02 20%, #c3f985 30%, #CCCCFF 40%, #ff7902 50%, #f38bf0 60%, #ff7902 70%, #c3f985 80%, #ff7d02 90%, #FFEB3B 100%);
+  background-image: -webkit-linear-gradient(
+    left,
+    #ffeb3b,
+    #ff7d02 10%,
+    #ff7d02 20%,
+    #c3f985 30%,
+    #ccccff 40%,
+    #ff7902 50%,
+    #f38bf0 60%,
+    #ff7902 70%,
+    #c3f985 80%,
+    #ff7d02 90%,
+    #ffeb3b 100%
+  );
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
   -webkit-background-size: 200% 100%;

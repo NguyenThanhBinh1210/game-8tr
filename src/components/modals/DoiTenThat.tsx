@@ -2,7 +2,7 @@
 const DoiTenThat = ({ isShow, onClose }: any) => {
   return (
     <div
-      className={`${isShow ? 'opacity-100 visible' : 'opacity-0 invisible'} fixed top-0 left-0 w-full h-full bg-white`}
+      className={`${isShow ? 'opacity-100 visible' : 'opacity-0 invisible'} fixed top-0 left-0 w-full h-full bg-primary`}
     >
       <div className='z-100 sticky  top-0 left-0 w-full h-max flex  justify-between bg-primary py-2.5 px-2'>
         <button onClick={onClose}>
@@ -21,12 +21,16 @@ const DoiTenThat = ({ isShow, onClose }: any) => {
         <button className='text-white text-sm'></button>
       </div>
       <div className=' pt-3 px-8 min-h-screen'>
-        <form action='' className='bg-white py-4'>
+        <form action='' className='bg-[#132235] rounded-md p-2 py-4'>
           <div className='flex flex-col text-sm mb-4'>
-            <label htmlFor='' className='mb-1'>
+            <label htmlFor='' className='mb-1 text-white'>
               Tên thật
             </label>
-            <input className='rounded-full border py-2 px-3' type='password' placeholder='Tên thật' />
+            <input
+              className='rounded-full border text-white border-[#1d2d3f] py-2 px-3'
+              type='text'
+              placeholder='Tên thật'
+            />
           </div>
 
           <button className='bg-primary text-white w-full py-2.5 mt-2 rounded-full'>Xác nhận </button>

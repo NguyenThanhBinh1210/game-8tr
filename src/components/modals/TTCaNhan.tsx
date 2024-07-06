@@ -1,5 +1,5 @@
-import { useState } from "react"
-import DoiTenThat from "./DoiTenThat"
+import { useState } from 'react'
+import DoiTenThat from './DoiTenThat'
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const TTCaNhan = ({ isShow, onClose }: any) => {
@@ -7,7 +7,7 @@ const TTCaNhan = ({ isShow, onClose }: any) => {
 
   return (
     <div
-      className={`${isShow ? 'opacity-100 visible' : 'opacity-0 invisible'} fixed top-0 left-0 w-full h-full bg-white`}
+      className={`${isShow ? 'opacity-100 visible' : 'opacity-0 invisible'} fixed top-0 left-0 w-full h-full bg-primary`}
     >
       <div className='z-100 sticky  top-0 left-0 w-full h-max flex  justify-between bg-primary py-2.5 px-2'>
         <button onClick={onClose}>
@@ -25,10 +25,10 @@ const TTCaNhan = ({ isShow, onClose }: any) => {
         <h2 className='text-xl text-white'>Thông tin cá nhân</h2>
         <button className='text-white text-sm'></button>
       </div>
-      <div className='bg-[#efeef4] min-h-screen pt-4'>
+      <div className='bg-primary min-h-screen pt-4'>
         <button
           // onClick={() => setShowDoiMKDangNhap(true)}
-          className='bg-white  w-full flex py-3 border-b text-sm justify-between px-6'
+          className='bg-[#132235] text-white  w-full flex py-3 border-b border-[#182637] text-sm justify-between px-6'
         >
           Avatar
           <div className='flex items-center gap-x-2 text-gray-400'>
@@ -47,7 +47,7 @@ const TTCaNhan = ({ isShow, onClose }: any) => {
         </button>
         <button
           // onClick={() => setShowDoiMKRutTien(true)}
-          className='bg-white  w-full flex py-3 border-b text-sm justify-between px-6'
+          className='bg-[#132235] text-white  w-full flex py-3 border-b border-[#182637] text-sm justify-between px-6'
         >
           Số tài khoản
           <div className='flex items-center gap-x-2 '>
@@ -66,7 +66,7 @@ const TTCaNhan = ({ isShow, onClose }: any) => {
         </button>
         <button
           onClick={() => setShowDoiTenThat(true)}
-          className='bg-white  w-full flex py-3 border-b text-sm justify-between px-6'
+          className='bg-[#132235] text-white  w-full flex py-3 border-b border-[#182637] text-sm justify-between px-6'
         >
           Tên thật
           <div className='flex items-center gap-x-2 '>
@@ -85,7 +85,6 @@ const TTCaNhan = ({ isShow, onClose }: any) => {
         </button>
       </div>
       <DoiTenThat isShow={isDoiTenThat} onClose={() => setShowDoiTenThat(false)}></DoiTenThat>
-
     </div>
   )
 }

@@ -15,13 +15,13 @@ const My = () => {
   const [isTTBaoMat, setShowTTBaoMat] = useState(false)
   const [isLoiNhuan, setShowLoiNhuan] = useState(false)
   return (
-    <div className='bg-[#efeef4] min-h-screen'>
+    <div className='bg-primary min-h-screen'>
       <div className='flex justify-between bg-primary py-2.5 px-2'>
         <button></button>
         <h2 className='text-xl text-white'>Tài khoản của tôi</h2>
         <button className='text-white text-sm'>Dịch vụ</button>
       </div>
-      <div className='bg-white p-5 flex justify-between border-b'>
+      <div className='bg-[#132235] text-white p-5 flex justify-between border-b border-[#18273a]'>
         <div className='flex'>
           <img src={avtar} alt='avtar' className='w-[71px] h-max flex-shrink-0' />
           <div className='ml-5  text-lg space-y-1'>
@@ -47,7 +47,7 @@ const My = () => {
           </svg>
         </button>
       </div>
-      <div className='bg-white grid grid-cols-4 py-2'>
+      <div className='bg-primary text-white grid grid-cols-4 py-2'>
         <button className='text-xs flex flex-col items-center'>
           <img className='w-[30px]' src={nap} alt='nap' />
           Nạp tiền
@@ -68,7 +68,7 @@ const My = () => {
       <div className='mt-4'>
         <button
           onClick={() => setShowTTCaNhan(true)}
-          className='bg-white  w-full flex py-3 border-b text-sm justify-between px-6'
+          className='bg-primary text-white  w-full flex py-3 border-b border-[#132235] text-sm justify-between px-6'
         >
           <div className='flex items-center gap-x-2'>
             <svg
@@ -100,7 +100,7 @@ const My = () => {
         </button>
         <button
           onClick={() => setShowTTBaoMat(true)}
-          className='bg-white  w-full flex py-3 border-b text-sm justify-between px-6'
+          className='bg-primary text-white  w-full flex py-3 border-b border-[#132235] text-sm justify-between px-6'
         >
           <div className='flex items-center gap-x-2'>
             <svg
@@ -130,7 +130,7 @@ const My = () => {
             <path strokeLinecap='round' strokeLinejoin='round' d='m8.25 4.5 7.5 7.5-7.5 7.5' />
           </svg>
         </button>
-        <button className='bg-white  w-full flex py-3 border-b text-sm justify-between px-6'>
+        <button className='bg-primary text-white  w-full flex py-3 border-b border-[#132235] text-sm justify-between px-6'>
           <div className='flex items-center gap-x-2'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
@@ -161,8 +161,8 @@ const My = () => {
         </button>
         <button
           onClick={() => setShowLoiNhuan(true)}
-
-          className='bg-white  w-full flex py-3 border-b text-sm justify-between px-6'>
+          className='bg-primary text-white  w-full flex py-3 border-b border-[#132235] text-sm justify-between px-6'
+        >
           <div className='flex items-center gap-x-2'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
@@ -191,7 +191,10 @@ const My = () => {
             <path strokeLinecap='round' strokeLinejoin='round' d='m8.25 4.5 7.5 7.5-7.5 7.5' />
           </svg>
         </button>
-        <Link to={'/new'} className='bg-white  w-full flex py-3 border-b text-sm justify-between px-6'>
+        <Link
+          to={'/new'}
+          className='bg-primary text-white  w-full flex py-3 border-b border-[#132235] text-sm justify-between px-6'
+        >
           <div className='flex items-center gap-x-2'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
@@ -220,7 +223,7 @@ const My = () => {
             <path strokeLinecap='round' strokeLinejoin='round' d='m8.25 4.5 7.5 7.5-7.5 7.5' />
           </svg>
         </Link>
-        {/* <button className='bg-white  w-full flex py-3 border-b text-sm justify-between px-6'>
+        {/* <button className='bg-primary text-white  w-full flex py-3 border-b border-[#132235] text-sm justify-between px-6'>
           <div className='flex items-center gap-x-2'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
@@ -250,7 +253,7 @@ const My = () => {
           </svg>
         </button> */}
       </div>
-      <button className='bg-white mt-3 w-full flex py-2 justify-between px-6'>
+      <button className='bg-primary text-white mt-3 w-full flex py-2 justify-between px-6'>
         Thoát
         <svg
           xmlns='http://www.w3.org/2000/svg'

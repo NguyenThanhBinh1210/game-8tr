@@ -1,20 +1,20 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const BetRecord = () => {
   const navigate = useNavigate()
 
-  const [activeTab, setActiveTab] = useState(0);
+  const [activeTab, setActiveTab] = useState(0)
 
   const tabs = [
     { id: 0, title: 'Tất cả', content: 'This is the content of Tab 1' },
     { id: 1, title: 'Đã trúng thưởng', content: 'This is the content of Tab 2' },
     { id: 2, title: 'Không trúng thưởng', content: 'This is the content of Tab 3' },
-    { id: 4, title: 'Chờ giải thưởng', content: 'This is the content of Tab 3' },
-  ];
+    { id: 4, title: 'Chờ giải thưởng', content: 'This is the content of Tab 3' }
+  ]
 
   return (
-    <div>
+    <div className='bg-primary min-h-screen'>
       <div className='flex justify-between bg-primary py-2.5 px-2'>
         <button onClick={() => navigate(-1)}>
           <svg
@@ -31,25 +31,24 @@ const BetRecord = () => {
         <h2 className='text-xl text-white'>Hồ sơ cá cược</h2>
         <button className='text-white text-sm'></button>
       </div>
-      <div className="">
-        <div className="grid grid-cols-4 border-b">
+      <div className=''>
+        <div className='grid grid-cols-4 '>
           {tabs.map((tab) => (
             <button
               key={tab.id}
-              className={`py-3 px-4 text-sm ${activeTab === tab.id
-                ? 'border-b-2 border-primary text-primary'
-                : 'bg-gray-200'
-                }`}
+              className={`py-3 px-4 text-sm ${
+                activeTab === tab.id ? 'border-b-2 bg-[#1096ae] border-[#1096ae] text-white' : 'bg-[#132235] text-white'
+              }`}
               onClick={() => setActiveTab(tab.id)}
             >
               {tab.title}
             </button>
           ))}
         </div>
-        <div className="mt-4">
+        <div className='mt-4'>
           {tabs.map((tab) =>
             activeTab === tab.id ? (
-              <div key={tab.id} className="p-4 border rounded bg-gray-50">
+              <div key={tab.id} className='p-4 text-white rounded bg-[#132235]'>
                 {tab.content}
               </div>
             ) : null

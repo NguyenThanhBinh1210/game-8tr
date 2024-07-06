@@ -99,7 +99,6 @@ const Hang6 = () => {
           <div className='flex justify-center text-orange-800 p-4 border-b border-gray-300'>Đôi</div>
           <div className='flex justify-center p-4 border-b border-gray-300'>9.99</div>
         </div>
-
       </div>
     </div>
   )

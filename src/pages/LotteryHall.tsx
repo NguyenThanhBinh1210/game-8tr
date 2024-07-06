@@ -36,7 +36,7 @@ const LotteryHall = () => {
   }, [activeTab])
 
   return (
-    <div>
+    <div className='bg-primary min-h-screen'>
       <div className='z-100 sticky  top-0 left-0 w-full h-max flex  justify-between bg-primary py-2.5 px-2'>
         <button onClick={() => navigate(-1)}>
           <svg
@@ -58,8 +58,11 @@ const LotteryHall = () => {
           {tabs.map((tab, index) => (
             <button
               key={index}
-              className={`py-3 px-4 flex flex-col items-center justify-center text-sm ${activeTab === tab.id ? 'border-b-2 border-primary text-primary' : 'bg-gray-200'
-                }`}
+              className={`py-3 px-4 flex flex-col items-center justify-center text-sm ${
+                activeTab === tab.id
+                  ? 'border-b-2 bg-[#1096ae] border-[#1096ae] text-white  '
+                  : ' bg-[#132235] text-white'
+              }`}
               onClick={() => {
                 setActiveTab(index)
               }}
@@ -87,15 +90,15 @@ const LotteryHall = () => {
             </button>
           ))}
         </div>
-        <div className='grid grid-cols-2'>
+        <div className='grid grid-cols-2 gap-[1px] bg-primary'>
           {showList.map((item, index) => (
             <button
               onClick={() => setShowGameYgpk(true)}
               key={index}
-              className='flex flex-col items-center border py-4'
+              className='flex flex-col bg-[#132235] items-center py-4'
             >
               <img className='w-[35px] ' src={item.img} loading='lazy' alt='1' />
-              <p className='text-sm'>{item.title}</p>
+              <p className='text-sm text-white'>{item.title}</p>
               <p className='text-gray-500 text-xs'>{item.time}</p>
             </button>
           ))}

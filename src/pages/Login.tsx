@@ -47,7 +47,9 @@ const Login = () => {
             Quên mật khẩu
           </Link>
           <button className='bg-primary text-white w-full py-2.5 mt-2 rounded-full'>Đăng nhập</button>
-          <Link to={'/register'} className='block text-center text-primary w-full py-2.5 mt-2 rounded-full'>Đăng ký</Link>
+          <Link to={'/register'} className='block text-center text-primary w-full py-2.5 mt-2 rounded-full'>
+            Đăng ký
+          </Link>
         </form>
       </div>
     </div>

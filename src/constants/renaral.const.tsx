@@ -365,7 +365,6 @@ export const gamePhiThuyen = [
     title: 'Hạng 5',
     type: 'hang-5',
     content: <Hang5 />
-
   },
   {
     title: 'Thứ 6',

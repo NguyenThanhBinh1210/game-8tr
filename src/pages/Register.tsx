@@ -20,8 +20,6 @@ const Register = () => {
         <button className='text-white text-sm'></button>
       </div>
       <div className='px-8 pt-3'>
-
-
         <form action=''>
           <div className='font-bold text-lg mb-2'> Không có mã giới thiệu:9473</div>
           <div className='flex flex-col text-sm mb-4'>
