@@ -1,6 +1,56 @@
 import '~/styles/header.scss'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useContext, useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
+import { loginAccount } from '~/apis/auth.api'
+import { useMutation } from 'react-query'
+import { AppContext } from '~/contexts/app.context'
 const Login = () => {
+  const mutation = useMutation((body: any) => {
+    return loginAccount(body)
+  })
+  const { isAuthenticated, setIsAuthenticated, setProfile } = useContext(AppContext)
+  const navigate = useNavigate()
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    console.log(formState)
+    mutation.mutate(formState, {
+      onSuccess: (dataUser) => {
+        toast.success('Đã đăng nhập thành công!🎉')
+        console.log(dataUser)
+        const newUser = dataUser.data.user
+        setProfile(newUser)
+        setIsAuthenticated(true)
+        navigate('/')
+      },
+      onError: (data: any) => {
+        toast.warn(data.response.data.errMessage)
+        console.log(data.response.data.errMessage)
+      }
+    })
+  }
+
+  const initialFromState = {
+    username: '',
+    password: ''
+  }
+  const [formState, setFormState] = useState(initialFromState)
+
+  const handleChange = (name: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target
+    if (name === 'phone') {
+      const validValue = value.replace(/\D/g, '').slice(0, 10)
+      setFormState((prev) => ({ ...prev, [name]: validValue }))
+    } else {
+      setFormState((prev) => ({ ...prev, [name]: value }))
+    }
+  }
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/')
+    }
+  }, [isAuthenticated, navigate])
   return (
     <div>
       <div className='flex justify-between bg-primary py-2.5 px-2'>
@@ -30,18 +80,30 @@ const Login = () => {
           <p className='my_logo text-lg'>Paradise Walkerhill Casino</p>
           <p className='my_logo text-lg'>Walkerhill-Paradise Casino</p>
         </div>
-        <form action=''>
+        <form action='' onSubmit={handleSubmit}>
           <div className='flex flex-col text-sm mb-4'>
             <label htmlFor='' className='mb-1'>
               Tên người dùng
             </label>
-            <input className='rounded-full border py-2 px-3' type='text' placeholder='Tên người dùng' />
+            <input
+              className='rounded-full border py-2 px-3'
+              type='text'
+              placeholder='Tên người dùng'
+              value={formState.username}
+              onChange={handleChange('username')}
+            />
           </div>
           <div className='flex flex-col text-sm mb-4'>
             <label htmlFor='' className='mb-1'>
               Mật khẩu
             </label>
-            <input className='rounded-full border py-2 px-3' type='text' placeholder='Mật khẩu' />
+            <input
+              className='rounded-full border py-2 px-3'
+              type='text'
+              placeholder='Mật khẩu'
+              value={formState.password}
+              onChange={handleChange('password')}
+            />
           </div>
           <Link to={'/'} className='ml-auto block w-max text-primary'>
             Quên mật khẩu
