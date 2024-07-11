@@ -1,16 +1,120 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { gamePhiThuyen, typeColor } from '~/constants/renaral.const'
+import { randomNumber, randomNumbers } from '~/apis/random.api'
+import { useQuery } from 'react-query'
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 const GameYgpk = ({ isShow, onClose }: any) => {
+  // const queryClient = useQueryClient()
+  const [numbers, setNumbers] = useState<(number | null)[]>([])
+  const [startTime, setStartTime] = useState(0)
+  const [stopTime, setStopTime] = useState(0)
+  const [resetTime, setResetTime] = useState(0)
+  const [isLoadingData, setIsLoadingData] = useState(false) // State to manage loading state
+
+  const [data, setData] = useState<any>()
+  const [dataAll, setDataAll] = useState<any[]>([])
+
+  const [remainingTime, setRemainingTime] = useState('')
+  const [remainingTimes, setRemainingTimes] = useState('')
   const [activeTab, setActiveTab] = useState(gamePhiThuyen[0])
-  const numbers = [9, 2, 7, 1, 6, 3, 8, 5, 4, 10]
+
+  const { refetch } = useQuery({
+    queryKey: ['table', 4],
+    queryFn: () => {
+      setIsLoadingData(true) // Start loading when API call is made
+      return randomNumber()
+    },
+    onSuccess: (data) => {
+      setData(data.data)
+      setNumbers(data.data.getNumber.randomNumbers)
+      setStartTime(data.data.getNumber.startTime)
+      setStopTime(data.data.getNumber.stopTime)
+      setResetTime(data.data.getNumber.resetTime)
+      setIsLoadingData(false) // Stop loading when data is returned
+    },
+    cacheTime: 30000
+  })
+
+  useQuery({
+    queryKey: ['tableAlls', 4],
+    queryFn: () => {
+      setIsLoadingData(true) // Start loading when API call is made
+      return randomNumbers()
+    },
+    onSuccess: (data) => {
+      setDataAll(data.data.data)
+      setIsLoadingData(false) // Stop loading when data is returned
+    },
+    cacheTime: 30000
+  })
+
+  useEffect(() => {
+    const updateRemainingTime = () => {
+      const now = Math.floor(Date.now() / 1000)
+      const difference = startTime - now
+      const differences = stopTime - now
+      const resetTimes = resetTime - now
+
+      if (isLoadingData) {
+        return // Don't update time if loading
+      }
+
+      if (differences > 0) {
+        setNumbers(dataAll[0]?.randomNumbers || []) // Ensure dataAll and randomNumbers are defined
+      } else if (differences <= 0 && resetTimes > 0) {
+        setRemainingTimes('00:00:00')
+        setNumbers(Array(9).fill(null))
+      } else if (resetTimes === 0 && difference > 0) {
+        setRemainingTimes('00:00:00')
+        refetch()
+        return
+      } else if (difference <= 0) {
+        setRemainingTimes('00:00:00')
+        setRemainingTime('00:00:00')
+        refetch()
+        return
+      }
+
+      const hours = Math.floor(difference / 3600)
+        .toString()
+        .padStart(2, '0')
+      const minutes = Math.floor((difference % 3600) / 60)
+        .toString()
+        .padStart(2, '0')
+      const seconds = (difference % 60).toString().padStart(2, '0')
+
+      let hour
+      let minute
+      let second
+      if (differences > 0) {
+        hour = Math.floor(differences / 3600)
+          .toString()
+          .padStart(2, '0')
+        minute = Math.floor((differences % 3600) / 60)
+          .toString()
+          .padStart(2, '0')
+        second = (differences % 60).toString().padStart(2, '0')
+      } else {
+        hour = '00'
+        minute = '00'
+        second = '00'
+      }
+
+      setRemainingTime(`${hours}:${minutes}:${seconds}`)
+      setRemainingTimes(`${hour}:${minute}:${second}`)
+    }
+
+    const intervalId = setInterval(updateRemainingTime, 1000)
+    updateRemainingTime()
+
+    return () => clearInterval(intervalId)
+  }, [startTime, stopTime, resetTime, refetch, isLoadingData, dataAll])
 
   return (
     <div
       className={`${isShow ? 'opacity-100 visible' : 'opacity-0 invisible'} z-50 fixed top-0 left-0 w-full h-full bg-white`}
     >
-      <div className='z-100 sticky  top-0 left-0 w-full h-max flex  justify-between bg-primary py-2.5 px-2'>
+      <div className='z-100 sticky top-0 left-0 w-full h-max flex justify-between bg-primary py-2.5 px-2'>
         <button onClick={onClose}>
           <svg
             xmlns='http://www.w3.org/2000/svg'
@@ -26,11 +130,18 @@ const GameYgpk = ({ isShow, onClose }: any) => {
         <h2 className='text-xl text-white'>168 Phi thuyền</h2>
         <button className='text-white text-sm'></button>
       </div>
-      <div className=' min-h-screen bg-blue-gray-50'>
+      <div className='min-h-screen bg-blue-gray-50'>
+        {isLoadingData && (
+          <div className='fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-50 z-50'>
+            <div className='spinner-border text-primary' role='status'>
+              <span className='sr-only'>Loading...</span>
+            </div>
+          </div>
+        )}
         <div className='flex pt-3 pb-2 justify-between pr-2 bg-white md:pl-2'>
           <div>
-            <p>53781178 Giai đoạn</p>
-            <p>53781179 Giai đoạn</p>
+            <p>{data?.getNumber?.randomId} Giai đoạn</p>
+            <p>{Number(data?.getNumber?.randomId) + 1} Giai đoạn</p>
             <div className='space-x-2'>
               <span>
                 Số dư <span className='text-primary'>0.00</span>
@@ -56,7 +167,12 @@ const GameYgpk = ({ isShow, onClose }: any) => {
             </div>
             <div className='mt-2'>
               <span>
-                Đóng đĩa: <span className='text-primary'>00</span> : <span className='text-primary'>00</span>
+                Đóng đĩa: <span className='text-primary'>{remainingTimes}</span>
+              </span>
+            </div>
+            <div className='mt-2'>
+              <span>
+                Bắt đầu lượt mới: <span className='text-primary'>{remainingTime}</span>
               </span>
             </div>
           </div>
@@ -77,12 +193,14 @@ const GameYgpk = ({ isShow, onClose }: any) => {
             </svg>
           </button>
         </div>
-        <div className='grid grid-cols-4 '>
+        <div className='grid grid-cols-4'>
           <div style={{ height: 'calc(100vh - 150px)' }} className='overflow-y-auto'>
             {gamePhiThuyen.map((item) => (
               <button
                 onClick={() => setActiveTab(item)}
-                className={`w-full pl-2 py-4 text-left ${activeTab.type === item.type ? 'bg-primary text-white' : ''}  border-b border-gray-400`}
+                className={`w-full pl-2 py-4 text-left ${
+                  activeTab.type === item.type ? 'bg-primary text-white' : ''
+                }  border-b border-gray-400`}
                 key={item.type}
               >
                 {item.title}
